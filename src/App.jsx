@@ -1,5 +1,6 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
+import DivineStory from './components/DivineStory'
 import About from './components/About'
 import Skills from './components/Skills'
 import Projects from './components/Projects'
@@ -11,6 +12,7 @@ const App = () => (
     <Navbar />
     <main>
       <Hero />
+      <DivineStory />
       <About />
       <Skills />
       <Projects />
