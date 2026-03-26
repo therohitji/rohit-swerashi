@@ -3,13 +3,13 @@ import gsap from 'gsap'
 
 export default function CustomCursor() {
   const wrapRef = useRef(null)
-  const chakRef = useRef(null)
+  const svgRef  = useRef(null)
   const spinTw  = useRef(null)
 
   useEffect(() => {
-    gsap.set(chakRef.current, { transformOrigin: '0px 0px' })
-
-    spinTw.current = gsap.to(chakRef.current, {
+    /* Rotate the SVG element itself — GSAP uses 50% 50% by default on HTML
+       elements, so the disc spins perfectly around its own centre. */
+    spinTw.current = gsap.to(svgRef.current, {
       rotation: 360, duration: 1.4, ease: 'none', repeat: -1,
     })
 
@@ -20,20 +20,20 @@ export default function CustomCursor() {
     }
 
     const onEnterLink = () => {
-      gsap.to(wrapRef.current, { scale: 1.65, duration: 0.25, ease: 'back.out(2)' })
+      gsap.to(svgRef.current, { scale: 1.65, duration: 0.25, ease: 'back.out(2)', transformOrigin: '50% 50%' })
       spinTw.current.timeScale(3)
     }
     const onLeaveLink = () => {
-      gsap.to(wrapRef.current, { scale: 1, duration: 0.3 })
+      gsap.to(svgRef.current, { scale: 1, duration: 0.3, transformOrigin: '50% 50%' })
       spinTw.current.timeScale(1)
     }
 
     const onEnterImg = () => {
-      gsap.to(wrapRef.current, { scale: 2.6, duration: 0.35, ease: 'back.out(1.5)' })
+      gsap.to(svgRef.current, { scale: 2.6, duration: 0.35, ease: 'back.out(1.5)', transformOrigin: '50% 50%' })
       spinTw.current.timeScale(6)
     }
     const onLeaveImg = () => {
-      gsap.to(wrapRef.current, { scale: 1, duration: 0.4 })
+      gsap.to(svgRef.current, { scale: 1, duration: 0.4, transformOrigin: '50% 50%' })
       spinTw.current.timeScale(1)
     }
 
@@ -68,6 +68,7 @@ export default function CustomCursor() {
       style={{ zIndex: 9999, marginLeft: -22, marginTop: -22, willChange: 'transform' }}
     >
       <svg
+        ref={svgRef}
         width="44" height="44"
         viewBox="-37 -37 74 74"
         xmlns="http://www.w3.org/2000/svg"
@@ -80,14 +81,9 @@ export default function CustomCursor() {
           ].join(' '),
         }}
       >
-        {/* Single spinning disc */}
-        <g ref={chakRef}>
-          {blades}
-          <circle r="17" fill="none" stroke="#d4af37" strokeWidth="1.4" />
-          <circle r="18.5" fill="none" stroke="rgba(212,175,55,0.22)" strokeWidth="0.6" />
-        </g>
-
-        {/* Static centre */}
+        {blades}
+        <circle r="17" fill="none" stroke="#d4af37" strokeWidth="1.4" />
+        <circle r="18.5" fill="none" stroke="rgba(212,175,55,0.22)" strokeWidth="0.6" />
         <circle r="2.8" fill="#f5e090" />
         <circle r="1" fill="rgba(255,255,220,0.95)" />
       </svg>
