@@ -9,6 +9,7 @@ import Preloader from './components/Preloader'
 import CustomCursor from './components/CustomCursor'
 import SideNav from './components/SideNav'
 import GrainOverlay from './components/GrainOverlay'
+import FloatingSymbols from './components/FloatingSymbols'
 
 /* Section content components */
 import HeroSection from './sections/HeroSection'
@@ -111,6 +112,7 @@ export default function App() {
       {ready && (
         <>
           <GrainOverlay />
+          <FloatingSymbols />
           <CustomCursor />
           <SideNav />
 

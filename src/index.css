@@ -76,3 +76,71 @@
   90%  { background-position: -18% 10%; }
   100% { background-position:  0%   0%; }
 }
+
+/* ── Floating Hindu symbols ──────────────────────────────── */
+/* gentle up-down */
+.sym-float {
+  animation-name: symFloat;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+@keyframes symFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-18px); }
+}
+
+/* float with subtle rotation — feathers, bows, text */
+.sym-float-r {
+  animation-name: symFloatR;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+@keyframes symFloatR {
+  0%, 100% { transform: translateY(0px)   rotate(0deg); }
+  38%       { transform: translateY(-16px) rotate(4deg); }
+  70%       { transform: translateY(-8px)  rotate(-3deg); }
+}
+
+/* full clockwise spin — chakra, surya */
+.sym-spin {
+  animation-name: symSpin;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes symSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* counter-clockwise — yantra, lotus */
+.sym-spin-r {
+  animation-name: symSpinR;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes symSpinR {
+  to { transform: rotate(-360deg); }
+}
+
+/* scale breath — diya flames, sparkles */
+.sym-pulse {
+  animation-name: symPulse;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+@keyframes symPulse {
+  0%, 100% { transform: scale(0.88); }
+  50%       { transform: scale(1.14); }
+}
+
+/* slow orbital drift — arrows, small accents */
+.sym-drift {
+  animation-name: symDrift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+@keyframes symDrift {
+  0%, 100% { transform: translate(0px, 0px)   rotate(0deg); }
+  28%       { transform: translate(12px, -16px) rotate(6deg); }
+  55%       { transform: translate(20px, -7px)  rotate(-4deg); }
+  78%       { transform: translate(7px, -22px)  rotate(8deg); }
+}
