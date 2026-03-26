@@ -14,6 +14,11 @@
     color: #f0e6d0;
     font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
+    cursor: none;
+  }
+
+  a, button, [role="button"], img, [data-cursor="view"] {
+    cursor: none;
   }
 
   * {
