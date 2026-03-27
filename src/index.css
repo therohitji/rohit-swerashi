@@ -616,101 +616,92 @@
 
   /* ── Content container ───────────────────────────────────────── */
   .editorial-content {
-    padding: 20px 16px 68px !important;
+    padding: 12px 12px 56px !important;
   }
 
   /* ── Chapter header labels ───────────────────────────────────── */
-  .ch-label  { margin-bottom: 8px !important; }
-  .ch-theme  { margin-bottom: 14px !important; font-size: 0.7rem !important; letter-spacing: 0.16em !important; }
-  .ch-rule   { margin-bottom: 14px !important; }
+  .ch-label  { margin-bottom: 5px !important; }
+  .ch-theme  { margin-bottom: 8px !important; font-size: 0.6rem !important; letter-spacing: 0.14em !important; }
+  .ch-rule   { margin-bottom: 8px !important; }
   .chapter-title {
-    font-size: clamp(1.05rem, 5.5vw, 1.4rem) !important;
-    margin-bottom: 4px !important;
+    font-size: clamp(0.88rem, 4.5vw, 1.15rem) !important;
+    margin-bottom: 3px !important;
   }
 
-  /* ── ALL Glass cards: compact by default ─────────────────────── */
+  /* ── ALL Glass cards ─────────────────────────────────────────── */
   .editorial-content .glass-box {
-    padding: 10px 12px !important;
-    border-radius: 10px !important;
-  }
-
-  /* ── Stats grid override (more compact than general glass) ───── */
-  .stats-row { gap: 6px !important; }
-  .stats-row .glass-box {
-    padding: 9px 8px !important;
+    padding: 7px 9px !important;
     border-radius: 8px !important;
   }
-  .stat-num { font-size: 1.05rem !important; margin-bottom: 2px !important; }
-  .stat-lbl { font-size: 8px !important; letter-spacing: 0.1em !important; }
 
-  /* ── Shloka card: specific overrides ────────────────────────── */
-  .shloka-card { margin-top: 16px !important; }
-  .shloka-card .glass-box { padding: 12px 14px !important; }
+  /* ── Stats grid ──────────────────────────────────────────────── */
+  .stats-row { gap: 4px !important; }
+  .stats-row .glass-box { padding: 6px 7px !important; border-radius: 7px !important; }
+  .stat-num { font-size: 0.88rem !important; margin-bottom: 1px !important; }
+  .stat-lbl { font-size: 6.5px !important; letter-spacing: 0.08em !important; }
+
+  /* ── Shloka card ─────────────────────────────────────────────── */
+  .shloka-card { margin-top: 10px !important; }
+  .shloka-card .glass-box { padding: 8px 10px !important; }
   .shloka-card .glass-box > div:first-child {
-    font-size: clamp(0.76rem, 3.2vw, 0.88rem) !important;
-    line-height: 1.55 !important;
-    margin-bottom: 5px !important;
+    font-size: clamp(0.66rem, 2.8vw, 0.78rem) !important;
+    line-height: 1.5 !important;
+    margin-bottom: 4px !important;
   }
   .shloka-card .glass-box > div:nth-child(2) {
-    font-size: 0.74rem !important;
-    line-height: 1.5 !important;
+    font-size: 0.66rem !important;
+    line-height: 1.45 !important;
   }
   .shloka-card .glass-box > div:last-child {
-    font-size: 7px !important;
-    margin-top: 5px !important;
+    font-size: 6.5px !important;
+    margin-top: 4px !important;
   }
 
   /* ── Blockquotes ─────────────────────────────────────────────── */
   .editorial-content blockquote {
-    font-size: clamp(0.82rem, 4vw, 1rem) !important;
-    line-height: 1.5 !important;
-    margin-bottom: 12px !important;
-    padding-left: 12px !important;
+    font-size: clamp(0.72rem, 3vw, 0.86rem) !important;
+    line-height: 1.45 !important;
+    margin-bottom: 10px !important;
+    padding-left: 10px !important;
   }
 
   /* ── Body paragraphs ─────────────────────────────────────────── */
   .editorial-content p {
-    font-size: clamp(0.78rem, 3.5vw, 0.88rem) !important;
-    margin-bottom: 12px !important;
-    line-height: 1.6 !important;
+    font-size: clamp(0.68rem, 3vw, 0.78rem) !important;
+    margin-bottom: 10px !important;
+    line-height: 1.55 !important;
   }
 
   /* ── Narrative bridge ────────────────────────────────────────── */
-  .narrative-bridge { margin-top: 12px !important; font-size: 0.68rem !important; }
+  .narrative-bridge { margin-top: 8px !important; font-size: 0.58rem !important; }
 
   /* ── Timeline ────────────────────────────────────────────────── */
-  .timeline-list { gap: 10px !important; }
-  .timeline-card {
-    grid-template-columns: 62px 1fr !important;
-    gap: 0 10px !important;
-  }
+  .timeline-list { gap: 6px !important; }
+  .timeline-card { grid-template-columns: 52px 1fr !important; gap: 0 8px !important; }
   .timeline-card > div:last-child > div:first-child {
-    font-size: 0.88rem !important;
-    margin-bottom: 2px !important;
-    line-height: 1.25 !important;
+    font-size: 0.76rem !important;
+    margin-bottom: 1px !important;
+    line-height: 1.2 !important;
   }
 
   /* ── Mentorship stats ────────────────────────────────────────── */
-  .mentorship-stat { padding: 10px 8px !important; }
-  .mstat-val { font-size: 1.05rem !important; margin-bottom: 3px !important; }
+  .mentorship-stat { padding: 7px 6px !important; }
+  .mstat-val { font-size: 0.9rem !important; margin-bottom: 2px !important; }
 
   /* ── Discipline transformation ───────────────────────────────── */
-  .discipline-stat { padding: 13px 14px !important; margin-bottom: 14px !important; }
-  .discipline-num  { font-size: 1.2rem !important; margin-bottom: 4px !important; }
+  .discipline-stat { padding: 9px 11px !important; margin-bottom: 10px !important; }
+  .discipline-num  { font-size: 1rem !important; margin-bottom: 3px !important; }
 
   /* ── Inner content grids ─────────────────────────────────────── */
-  .ch-inner-grid { gap: 8px !important; }
+  .ch-inner-grid { gap: 5px !important; }
 
   /* ── Bridge shloka between chapters ─────────────────────────── */
-  .bridge-shloka { padding: 18px 16px !important; }
+  .bridge-shloka { padding: 12px 12px !important; }
 
-  /* ── Mobile opener: compact ──────────────────────────────────── */
-  .mob-cluster {
-    padding: 0 18px 32px !important;
-    gap: 8px !important;
-  }
-  .mob-word    { font-size: clamp(2rem, 11vw, 3rem) !important; }
-  .mob-chname  { font-size: clamp(0.78rem, 3.2vw, 0.95rem) !important; }
+  /* ── Mobile opener ───────────────────────────────────────────── */
+  .mob-cluster { padding: 0 14px 22px !important; gap: 5px !important; }
+  .mob-word    { font-size: clamp(1.55rem, 8.5vw, 2.4rem) !important; }
+  .mob-chname  { font-size: clamp(0.66rem, 2.8vw, 0.82rem) !important; }
 }
 
 /* ── Image skeleton shimmer ─────────────────────────────────────────── */
