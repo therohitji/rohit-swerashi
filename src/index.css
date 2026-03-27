@@ -1,146 +1,732 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Jost:wght@300;400;500;600;700&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600;1,700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ── CSS Design Tokens ──────────────────────────────────────────────── */
+:root {
+  --bg:          #050b1a;
+  --gold:        #d4af37;
+  --gold-bright: #f0c040;
+  --gold-dim:    #8a6010;
+  --gold-pale:   #f5e090;
+  --cream:       #f0e6d0;
+  --crimson:     #8b1a1a;
+  --teal:        #2a7a6e;
+  --amber:       #c8941e;
+  --navy:        #070f24;
+}
+
+/* ── Base ────────────────────────────────────────────────────────────── */
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: auto; }
 
   body {
-    background-color: #050b1a;
-    color: #f0e6d0;
-    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg);
+    color: var(--cream);
+    padding-left: 36px; /* book spine width */
+    font-family: 'Jost', sans-serif;
     overflow-x: hidden;
     cursor: none;
   }
 
-  a, button, [role="button"], img, [data-cursor="view"] {
-    cursor: none;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
+  a, button, [role="button"], img, [data-cursor="view"] { cursor: none; }
+  * { box-sizing: border-box; }
 
   ::selection {
-    background-color: rgba(212, 175, 55, 0.28);
+    background-color: rgba(212,175,55,0.28);
     color: #f0d060;
   }
 
-  ::-webkit-scrollbar {
-    width: 5px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #050b1a;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: rgba(212, 175, 55, 0.5);
-    border-radius: 3px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #d4af37;
-  }
+  ::-webkit-scrollbar        { width: 4px; }
+  ::-webkit-scrollbar-track  { background: var(--bg); }
+  ::-webkit-scrollbar-thumb  { background: rgba(212,175,55,0.4); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
 }
 
-@layer utilities {
-  /* opacity-0 override so animate-rise can work */
-  .opacity-0 {
-    opacity: 0;
-  }
-}
-
-/* ── Film Grain Overlay ─────────────────────────────────────── */
+/* ── Film Grain ─────────────────────────────────────────────────────── */
 .grain-overlay {
   z-index: 9990;
-  opacity: 0.045;
+  opacity: 0.04;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 128px 128px;
-  animation: grain-shift 0.15s steps(1) infinite;
+  animation: grainShift 0.14s steps(1) infinite;
   mix-blend-mode: overlay;
 }
-
-@keyframes grain-shift {
+@keyframes grainShift {
   0%   { background-position:   0%   0%; }
-  10%  { background-position: -5%  -10%; }
-  20%  { background-position: -15%  5%; }
-  30%  { background-position:  7%  -25%; }
-  40%  { background-position: -5%  25%; }
-  50%  { background-position: -15% 10%; }
-  60%  { background-position: 15%   0%; }
-  70%  { background-position:  0%  15%; }
-  80%  { background-position:  3%  35%; }
-  90%  { background-position: -18% 10%; }
-  100% { background-position:  0%   0%; }
+  10%  { background-position:  -5%  -10%; }
+  20%  { background-position: -15%   5%; }
+  30%  { background-position:   7%  -25%; }
+  40%  { background-position:  -5%  25%; }
+  50%  { background-position: -15%  10%; }
+  60%  { background-position:  15%   0%; }
+  70%  { background-position:   0%  15%; }
+  80%  { background-position:   3%  35%; }
+  90%  { background-position: -18%  10%; }
+  100% { background-position:   0%   0%; }
 }
 
-/* ── Floating Hindu symbols ──────────────────────────────── */
-/* gentle up-down */
-.sym-float {
-  animation-name: symFloat;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-}
-@keyframes symFloat {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-18px); }
+/* ── Chapter Section ─────────────────────────────────────────────────── */
+.chapter-section {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 120px 0 100px;
 }
 
-/* float with subtle rotation — feathers, bows, text */
-.sym-float-r {
-  animation-name: symFloatR;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-}
-@keyframes symFloatR {
-  0%, 100% { transform: translateY(0px)   rotate(0deg); }
-  38%       { transform: translateY(-16px) rotate(4deg); }
-  70%       { transform: translateY(-8px)  rotate(-3deg); }
+.chapter-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 115%;   /* extra height for parallax */
+  top: -7.5%;
+  object-fit: cover;
+  object-position: center center;
+  pointer-events: none;
+  will-change: transform;
+  /* Gradient mask: image dissolves into background on all edges */
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%),
+    linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+  -webkit-mask-composite: destination-in;
+  mask-image:
+    linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%),
+    linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+  mask-composite: intersect;
 }
 
-/* full clockwise spin — chakra, surya */
-.sym-spin {
-  animation-name: symSpin;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
+/* ── Typography ─────────────────────────────────────────────────────── */
+.font-cinzel       { font-family: 'Cinzel', serif; }
+.font-cinzel-deco  { font-family: 'Cinzel Decorative', serif; }
+.font-cormorant    { font-family: 'Cormorant Garamond', serif; }
+
+/* ── Gold Shimmer Text ──────────────────────────────────────────────── */
+.gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--gold-dim) 0%,
+    var(--amber)    15%,
+    var(--gold)     35%,
+    var(--gold-pale) 50%,
+    var(--gold)     65%,
+    var(--amber)    85%,
+    var(--gold-dim) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmerMove 3.2s linear infinite;
 }
-@keyframes symSpin {
+@keyframes shimmerMove {
+  from { background-position: 200% center; }
+  to   { background-position: -200% center; }
+}
+
+/* ── Sanskrit Bridge between chapters ──────────────────────────────── */
+.bridge-shloka {
+  position: relative;
+  z-index: 10;
+  padding: 60px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ── Chapter Header ─────────────────────────────────────────────────── */
+.chapter-badge {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.55em;
+  color: var(--gold);
+  opacity: 0.65;
+  text-transform: uppercase;
+}
+
+.chapter-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.chapter-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  color: var(--cream);
+  opacity: 0.6;
+}
+
+/* ── Skill Bars ─────────────────────────────────────────────────────── */
+.skill-bar-track {
+  width: 100%;
+  height: 2px;
+  background: rgba(212,175,55,0.12);
+  border-radius: 1px;
+  overflow: hidden;
+}
+.skill-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-dim), var(--gold-bright));
+  border-radius: 1px;
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.skill-bar-fill.animate { transform: scaleX(1); }
+
+/* ── Timeline ───────────────────────────────────────────────────────── */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--gold) 20%, var(--gold) 80%, transparent);
+  opacity: 0.3;
+}
+
+/* ── Project Cards ──────────────────────────────────────────────────── */
+.project-card {
+  border: 1px solid rgba(212,175,55,0.18);
+  background: rgba(5,11,26,0.7);
+  backdrop-filter: blur(12px);
+  transition: border-color 0.3s, transform 0.4s;
+}
+.project-card:hover {
+  border-color: rgba(212,175,55,0.5);
+  transform: translateY(-4px);
+}
+
+/* ── Global Keyframes ───────────────────────────────────────────────── */
+
+/* Sudarshana Chakra rotation */
+@keyframes chakraSpin {
   to { transform: rotate(360deg); }
 }
 
-/* counter-clockwise — yantra, lotus */
-.sym-spin-r {
-  animation-name: symSpinR;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
+/* CosmicKshetra — planet orbits + chakra (GPU compositor, no reflow) */
+@keyframes cosmicOrbit {
+  to { transform: rotate(360deg); }
 }
-@keyframes symSpinR {
-  to { transform: rotate(-360deg); }
+/* Bindu breathing pulse — scale only, no geometry change */
+@keyframes cosmicBreathe {
+  0%, 100% { transform: scale(1);   opacity: 0.7; }
+  50%       { transform: scale(1.9); opacity: 1;   }
+}
+/* Bindu ripple rings — expand and fade */
+@keyframes cosmicRipple {
+  0%   { transform: scale(1);   opacity: 0.55; }
+  100% { transform: scale(2.8); opacity: 0;    }
+}
+@keyframes cosmicRippleSlow {
+  0%   { transform: scale(1);   opacity: 0.3; }
+  100% { transform: scale(4);   opacity: 0;   }
 }
 
-/* scale breath — diya flames, sparkles */
-.sym-pulse {
-  animation-name: symPulse;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
+/* Book engine — chakra / glow / float variants */
+@keyframes symSpin {
+  to { transform: rotate(360deg); }
 }
 @keyframes symPulse {
-  0%, 100% { transform: scale(0.88); }
-  50%       { transform: scale(1.14); }
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%      { opacity: 1;   transform: scale(1.04); }
+}
+@keyframes symFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
 }
 
-/* slow orbital drift — arrows, small accents */
-.sym-drift {
-  animation-name: symDrift;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
+/* Parchment page — hide scrollbar */
+.parchment-page::-webkit-scrollbar { display: none; }
+.parchment-page { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── Premium book animations ─────────────────────────────────────────── */
+
+/* Sacred ambient symbols — continuous slow drift upward per section */
+@keyframes sacredDrift {
+  0%   { opacity: 0;                    transform: translateY(0)              rotate(0deg)           scale(0.85); }
+  12%  { opacity: var(--sd-op, 0.06);  }
+  88%  { opacity: calc(var(--sd-op, 0.06) * 0.3); }
+  100% { opacity: 0;                    transform: translateY(var(--sd-y, -40px)) rotate(var(--sd-r, 12deg)) scale(1.15); }
 }
-@keyframes symDrift {
-  0%, 100% { transform: translate(0px, 0px)   rotate(0deg); }
-  28%       { transform: translate(12px, -16px) rotate(6deg); }
-  55%       { transform: translate(20px, -7px)  rotate(-4deg); }
-  78%       { transform: translate(7px, -22px)  rotate(8deg); }
+
+/* Bridge burst particles — fire outward from center */
+@keyframes burstFly {
+  0%   { opacity: 1;   transform: translate(0, 0)                        scale(1); }
+  18%  { opacity: 0.9; }
+  100% { opacity: 0;   transform: translate(var(--bx, 0), var(--by, -24px)) scale(0.2); }
+}
+
+/* Lotus petal drift upward */
+@keyframes petalFloat {
+  0%   { transform: translateY(0vh) translateX(0px) rotate(0deg); opacity: 0; }
+  5%   { opacity: 0.55; }
+  92%  { opacity: 0.3; }
+  100% { transform: translateY(-110vh) translateX(var(--drift)) rotate(var(--spin)); opacity: 0; }
+}
+
+/* Gold particle drift upward */
+@keyframes particleDrift {
+  0%   { transform: translateY(0) translateX(0); opacity: 0; }
+  8%   { opacity: var(--max-op); }
+  90%  { opacity: calc(var(--max-op) * 0.4); }
+  100% { transform: translateY(-80px) translateX(var(--sway)); opacity: 0; }
+}
+
+/* Sacred geometry draw-in */
+@keyframes geoAppear {
+  0%   { opacity: 0; stroke-dashoffset: 1000; }
+  40%  { opacity: 0.07; }
+  70%  { opacity: 0.05; stroke-dashoffset: 0; }
+  100% { opacity: 0; stroke-dashoffset: 0; }
+}
+
+/* Diamond pulse */
+@keyframes diamondPulse {
+  0%,100% { opacity: 0.35; transform: scale(1); }
+  50%     { opacity: 0.9;  transform: scale(1.35); }
+}
+
+/* Name letter arrive */
+@keyframes letterArrive {
+  from { opacity: 0; transform: var(--from-transform); filter: blur(8px); }
+  to   { opacity: 1; transform: translateX(0) translateY(0); filter: blur(0); }
+}
+
+/* Sanskrit materialize */
+@keyframes charMaterialize {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Crack shoot */
+@keyframes crackShoot {
+  from { height: 0; opacity: 0; }
+  15%  { opacity: 1; }
+  to   { height: 60vh; opacity: 1; }
+}
+
+/* Gold flash */
+@keyframes goldFlash {
+  0%   { opacity: 0; }
+  30%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Chapter enter */
+@keyframes chapterEnter {
+  from { opacity: 0; transform: translateY(48px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Value burn */
+@keyframes valueBurn {
+  0%   { opacity: 0; text-shadow: none; }
+  20%  { opacity: 0.6; text-shadow: 0 0 30px rgba(255,140,0,0.8); }
+  40%  { opacity: 1; text-shadow: 0 0 60px rgba(212,175,55,0.9); }
+  100% { opacity: 1; text-shadow: 0 0 20px rgba(212,175,55,0.4); }
+}
+
+/* Principle crash in */
+@keyframes crashIn {
+  from { opacity: 0; transform: translateX(-60px); filter: blur(5px); }
+  to   { opacity: 1; transform: translateX(0);    filter: blur(0);   }
+}
+
+/* Testimonial settle */
+@keyframes settleIn {
+  from { opacity: 0; transform: scale(1.08); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Contact ripple */
+@keyframes rippleOut {
+  from { opacity: 0; transform: scale(0.7) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Horizon glow pulse */
+@keyframes horizonGlow {
+  0%,100% { opacity: 0.55; }
+  50%     { opacity: 0.85; }
+}
+
+/* Slow orbit drift */
+@keyframes orbitDrift {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  25%  { transform: translate(8px, -12px) rotate(2deg); }
+  50%  { transform: translate(14px, -5px) rotate(-1deg); }
+  75%  { transform: translate(5px, -18px) rotate(3deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* OM breathe */
+@keyframes omBreathe {
+  0%,100% { transform: scale(1);    opacity: 0.9; }
+  50%     { transform: scale(1.04); opacity: 1; }
+}
+
+/* Butterfly flutter */
+@keyframes butterflyFly {
+  0%   { transform: translate(0, 0) scale(0) rotate(0deg); opacity: 0; }
+  10%  { opacity: 1; transform: scale(1); }
+  100% {
+    transform:
+      translate(var(--bfly-x), var(--bfly-y))
+      scale(var(--bfly-s))
+      rotate(var(--bfly-r));
+    opacity: var(--bfly-op);
+  }
+}
+
+/* Wing flap */
+@keyframes wingFlap {
+  0%,100% { transform: scaleX(1); }
+  50%     { transform: scaleX(0.35); }
+}
+
+/* Rise from ground */
+@keyframes riseUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Sword plant drop */
+@keyframes swordDrop {
+  from { transform: translateY(-60px) scaleY(0.3); opacity: 0; }
+  to   { transform: translateY(0) scaleY(1); opacity: 1; }
+}
+
+/* Skill tag bounce */
+@keyframes tagBounce {
+  from { opacity: 0; transform: scale(0.8) translateY(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Hero scroll hint */
+@keyframes scrollBounce {
+  0%,100% { transform: translateY(0); opacity: 0.5; }
+  50%     { transform: translateY(8px); opacity: 1; }
+}
+
+/* ChapterNav — arrow nudge upward to invite click */
+@keyframes navArrowNudge {
+  0%, 60%, 100% { transform: translateY(0); }
+  30%           { transform: translateY(-4px); }
+}
+
+/* Stat count-up glow */
+@keyframes statGlow {
+  from { text-shadow: none; opacity: 0; }
+  to   { text-shadow: 0 0 30px rgba(212,175,55,0.4); opacity: 1; }
+}
+
+/* Peacock feather iridescence */
+@keyframes featherShift {
+  0%   { filter: hue-rotate(0deg) saturate(1.2) brightness(1.1); }
+  33%  { filter: hue-rotate(20deg) saturate(1.5) brightness(1.2); }
+  66%  { filter: hue-rotate(-15deg) saturate(1.3) brightness(1.15); }
+  100% { filter: hue-rotate(0deg) saturate(1.2) brightness(1.1); }
+}
+
+/* Vishwarupa expand */
+@keyframes vishwaExpand {
+  from { transform: scale(0.15) translateY(40px); opacity: 0.1; }
+  to   { transform: scale(1) translateY(0); opacity: 0.75; }
+}
+
+/* Walk cycle */
+@keyframes walkCycle {
+  0%,100% { transform: translateY(0px); }
+  50%     { transform: translateY(-2px); }
+}
+
+/* Battle shake */
+@keyframes battleShake {
+  0%,100% { transform: translate(0, 0); }
+  20%     { transform: translate(-0.5px, 0.4px); }
+  40%     { transform: translate(0.6px, -0.3px); }
+  60%     { transform: translate(-0.4px, 0.5px); }
+  80%     { transform: translate(0.5px, -0.4px); }
+}
+
+/* Preloader shard fly */
+@keyframes shardOut {
+  from { opacity: 1; transform: translate(0,0) rotate(0deg) scale(1); }
+  to   { opacity: 0; transform: var(--shard-to); }
+}
+
+/* ── Responsive Layout ──────────────────────────────────────────────── */
+
+/* Tablet — stack art + text, hide art column (bg image stays) */
+@media (max-width: 900px) {
+  .chapter-section {
+    padding: 80px 0 60px;
+  }
+  .editorial-content {
+    padding-top: clamp(120px, 20vh, 200px) !important;
+  }
+  .ch-layout {
+    display: block !important;
+    max-width: 720px !important;
+  }
+  .ch-art {
+    display: none !important;
+  }
+  .chapter-title {
+    font-size: clamp(1.5rem, 5vw, 2.4rem);
+  }
+}
+
+/* Mobile — tighten padding, make all inner 2-col grids single column */
+@media (max-width: 600px) {
+  .chapter-section {
+    padding: 60px 0 48px;
+  }
+  .chapter-title {
+    font-size: clamp(1.3rem, 6vw, 1.9rem);
+  }
+  /* Force all inline-styled inner grids to single column */
+  .ch-inner-grid {
+    grid-template-columns: 1fr !important;
+  }
+  /* Stats row wraps to 2×2 on very small screens */
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Default: mobile opener is hidden on desktop */
+.mobile-opener {
+  display: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   MOBILE EXPERIENCE  ≤ 768px
+   Philosophy: Sacred Folio — full-screen chapter opener card (100svh)
+   with art + Roman numeral + editorial word + shloka, followed by
+   a dark content section below. Each chapter = a sacred scroll page.
+   ═══════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* ── Global ──────────────────────────────────────────────────────── */
+  body {
+    padding-left: 0 !important;
+  }
+  .book-spine {
+    display: none !important;
+  }
+
+  /* ── Hero ────────────────────────────────────────────────────────── */
+  .hero-content {
+    padding: 48px 20px 32px !important;
+  }
+
+  /* ── Mobile opener: shown as full-screen cover card ─────────────── */
+  .mobile-opener {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    height: 100svh !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  /* ── Chapter section: block layout so opener + content stack ──────── */
+  .chapter-section {
+    display: block !important;
+    padding: 0 !important;
+    min-height: auto !important;
+  }
+
+  /* ── Hide desktop-only editorial decorations ─────────────────────── */
+  .editorial-art,
+  .editorial-curtain,
+  .editorial-word,
+  .editorial-glow,
+  .art-skeleton {
+    display: none !important;
+  }
+
+  /* ── Content column: full-width dark block below the opener ─────── */
+  .editorial-content {
+    position: relative !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 20px 16px 68px !important;
+    background: rgba(3,8,16,0.99) !important;
+  }
+
+  /* ── Chapter title ────────────────────────────────────────────────── */
+  .chapter-title {
+    font-size: clamp(1.05rem, 5.5vw, 1.4rem) !important;
+    margin-bottom: 4px !important;
+  }
+
+  /* ── Page number: hidden ─────────────────────────────────────────── */
+  .page-number {
+    display: none !important;
+  }
+
+  /* ── Bridge shloka: ensure dark bg between chapters ─────────────── */
+  .bridge-shloka {
+    background: rgba(3,8,16,0.99) !important;
+    padding: 18px 16px !important;
+  }
+
+  /* ── ChapterNav ──────────────────────────────────────────────────── */
+  .chapter-nav-root {
+    left: 0 !important;
+  }
+  .chapter-nav-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+  .chapter-nav-root > div:first-child > div {
+    padding: 14px 14px 4px !important;
+  }
+}
+
+/* ── Small phones ≤ 420px ────────────────────────────────────────────── */
+@media (max-width: 420px) {
+  .chapter-nav-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .chapter-nav-dots {
+    display: none !important;
+  }
+  .editorial-content {
+    padding: 28px 16px 80px !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   MOBILE CONTENT: Compact & spacious — all chapters
+   ══════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* ── Content container ───────────────────────────────────────── */
+  .editorial-content {
+    padding: 20px 16px 68px !important;
+  }
+
+  /* ── Chapter header labels ───────────────────────────────────── */
+  .ch-label  { margin-bottom: 8px !important; }
+  .ch-theme  { margin-bottom: 14px !important; font-size: 0.7rem !important; letter-spacing: 0.16em !important; }
+  .ch-rule   { margin-bottom: 14px !important; }
+  .chapter-title {
+    font-size: clamp(1.05rem, 5.5vw, 1.4rem) !important;
+    margin-bottom: 4px !important;
+  }
+
+  /* ── ALL Glass cards: compact by default ─────────────────────── */
+  .editorial-content .glass-box {
+    padding: 10px 12px !important;
+    border-radius: 10px !important;
+  }
+
+  /* ── Stats grid override (more compact than general glass) ───── */
+  .stats-row { gap: 6px !important; }
+  .stats-row .glass-box {
+    padding: 9px 8px !important;
+    border-radius: 8px !important;
+  }
+  .stat-num { font-size: 1.05rem !important; margin-bottom: 2px !important; }
+  .stat-lbl { font-size: 8px !important; letter-spacing: 0.1em !important; }
+
+  /* ── Shloka card: specific overrides ────────────────────────── */
+  .shloka-card { margin-top: 16px !important; }
+  .shloka-card .glass-box { padding: 12px 14px !important; }
+  .shloka-card .glass-box > div:first-child {
+    font-size: clamp(0.76rem, 3.2vw, 0.88rem) !important;
+    line-height: 1.55 !important;
+    margin-bottom: 5px !important;
+  }
+  .shloka-card .glass-box > div:nth-child(2) {
+    font-size: 0.74rem !important;
+    line-height: 1.5 !important;
+  }
+  .shloka-card .glass-box > div:last-child {
+    font-size: 7px !important;
+    margin-top: 5px !important;
+  }
+
+  /* ── Blockquotes ─────────────────────────────────────────────── */
+  .editorial-content blockquote {
+    font-size: clamp(0.82rem, 4vw, 1rem) !important;
+    line-height: 1.5 !important;
+    margin-bottom: 12px !important;
+    padding-left: 12px !important;
+  }
+
+  /* ── Body paragraphs ─────────────────────────────────────────── */
+  .editorial-content p {
+    font-size: clamp(0.78rem, 3.5vw, 0.88rem) !important;
+    margin-bottom: 12px !important;
+    line-height: 1.6 !important;
+  }
+
+  /* ── Narrative bridge ────────────────────────────────────────── */
+  .narrative-bridge { margin-top: 12px !important; font-size: 0.68rem !important; }
+
+  /* ── Timeline ────────────────────────────────────────────────── */
+  .timeline-list { gap: 10px !important; }
+  .timeline-card {
+    grid-template-columns: 62px 1fr !important;
+    gap: 0 10px !important;
+  }
+  .timeline-card > div:last-child > div:first-child {
+    font-size: 0.88rem !important;
+    margin-bottom: 2px !important;
+    line-height: 1.25 !important;
+  }
+
+  /* ── Mentorship stats ────────────────────────────────────────── */
+  .mentorship-stat { padding: 10px 8px !important; }
+  .mstat-val { font-size: 1.05rem !important; margin-bottom: 3px !important; }
+
+  /* ── Discipline transformation ───────────────────────────────── */
+  .discipline-stat { padding: 13px 14px !important; margin-bottom: 14px !important; }
+  .discipline-num  { font-size: 1.2rem !important; margin-bottom: 4px !important; }
+
+  /* ── Inner content grids ─────────────────────────────────────── */
+  .ch-inner-grid { gap: 8px !important; }
+
+  /* ── Bridge shloka between chapters ─────────────────────────── */
+  .bridge-shloka { padding: 18px 16px !important; }
+
+  /* ── Mobile opener: compact ──────────────────────────────────── */
+  .mob-cluster {
+    padding: 0 18px 32px !important;
+    gap: 8px !important;
+  }
+  .mob-word    { font-size: clamp(2rem, 11vw, 3rem) !important; }
+  .mob-chname  { font-size: clamp(0.78rem, 3.2vw, 0.95rem) !important; }
+}
+
+/* ── Image skeleton shimmer ─────────────────────────────────────────── */
+@keyframes imgSkeleton {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Hero art entrance ───────────────────────────────────────────────── */
+@keyframes heroArtReveal {
+  from { opacity: 0; }
+  to   { opacity: 0.38; }
+}
+
+/* ── Ambient audio OM pulse ──────────────────────────────────────────── */
+@keyframes omPulse {
+  0%, 100% { box-shadow: 0 0 18px rgba(212,175,55,0.12), inset 0 0 10px rgba(212,175,55,0.04); }
+  50%       { box-shadow: 0 0 32px rgba(212,175,55,0.28), inset 0 0 18px rgba(212,175,55,0.08); }
 }
