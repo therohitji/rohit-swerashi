@@ -363,7 +363,7 @@ If you made it to the end of this README, you already know more about me than mo
 
 **Rohit Swerashi**
 
-Email: swerashirohit2003@gmail.com
+Email: rohitswerashi@thegenios.com
 LinkedIn: linkedin.com/in/rohit-swerashi
 Twitter: x.com/rohitswerashi
 Topmate: topmate.io/rohitswerashi
